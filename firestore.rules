@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /farmers/{farmerId} {
+      // You may read or delete a farmer only if you are signed in
+      // and you are the officer who registered them.
+      allow read, delete: if request.auth != null
+        && request.auth.uid == resource.data.ownerID;
+
+      // You may update your own farmer, but never hand them to someone else.
+      allow update: if request.auth != null
+        && request.auth.uid == resource.data.ownerID
+        && request.auth.uid == request.resource.data.ownerID;
+
+      // You may create a farmer only if you stamp it with your own id.
+      allow create: if request.auth != null
+        && request.auth.uid == request.resource.data.ownerID;
+    }
+  }
+}

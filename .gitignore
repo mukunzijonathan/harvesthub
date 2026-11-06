@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Course handouts
+FROM-BRAIN-TO-SCREEN.html
+
+# Firebase config: each developer adds their own from the Firebase console
+GoogleService-Info.plist
